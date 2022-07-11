@@ -72,4 +72,31 @@ class ShopServiceTest {
                         )
                 );
     }
+
+    @Test
+    void addAndListOrders() {
+        //given
+        ProductRepo productRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
+
+        //when
+        shopService.addOrder(106, List.of(1, 3, 4));
+        List<Order> actual = shopService.listOrders();
+
+        //then
+        List<Order> expected = List.of(
+                new Order(
+                        106,
+                        List.of(
+                                new Product(1, "Apfel"),
+                                new Product(3, "Zitrone"),
+                                new Product(4, "Mandarine")
+                        )
+                )
+        );
+        assertThat(actual)
+                .hasSameElementsAs(expected)
+                .hasSize(expected.size());
+    }
 }

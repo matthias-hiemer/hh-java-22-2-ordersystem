@@ -41,4 +41,8 @@ public class ShopService {
     public Order getOrder(int orderId) {
         return orderRepo.getOrder(orderId);
     }
+
+    public List<Order> listOrders() {
+        return orderRepo.listOrders();
+    }
 }

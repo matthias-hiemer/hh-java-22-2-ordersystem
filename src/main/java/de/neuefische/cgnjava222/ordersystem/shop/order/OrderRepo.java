@@ -1,6 +1,8 @@
 package de.neuefische.cgnjava222.ordersystem.shop.order;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OrderRepo {
@@ -13,5 +15,9 @@ public class OrderRepo {
 
     public Order getOrder(int orderId) {
         return orders.get(orderId);
+    }
+
+    public List<Order> listOrders() {
+        return new ArrayList<>(orders.values());
     }
 }

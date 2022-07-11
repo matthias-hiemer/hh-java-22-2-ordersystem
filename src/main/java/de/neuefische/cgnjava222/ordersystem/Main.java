@@ -22,8 +22,12 @@ public class Main {
         System.out.println(products);
 
         shopService.addOrder(101, List.of(2,3));
+        shopService.addOrder(102, List.of(1));
 
         Order order = shopService.getOrder(101);
         System.out.println(order);
+
+        List<Order> orders = shopService.listOrders();
+        System.out.println(orders);
     }
 }

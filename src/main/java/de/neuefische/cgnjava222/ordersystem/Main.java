@@ -29,5 +29,9 @@ public class Main {
 
         List<Order> orders = shopService.listOrders();
         System.out.println(orders);
+
+
+        shopService.addOrder(123, List.of(999));
+
     }
 }

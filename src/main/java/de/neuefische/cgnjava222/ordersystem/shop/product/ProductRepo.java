@@ -3,6 +3,7 @@ package de.neuefische.cgnjava222.ordersystem.shop.product;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class ProductRepo {
 
@@ -14,7 +15,11 @@ public class ProductRepo {
     );
 
     public Product getProduct(int id) {
-        return products.get(id);
+        Product product = products.get(id);
+        if (product == null) {
+            throw new NoSuchElementException("No product with id " + id + " found in this product repo.");
+        }
+        return product;
     }
 
     public List<Product> listProducts() {

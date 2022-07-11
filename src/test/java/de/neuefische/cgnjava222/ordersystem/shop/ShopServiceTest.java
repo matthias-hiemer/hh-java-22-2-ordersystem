@@ -4,9 +4,11 @@ import de.neuefische.cgnjava222.ordersystem.shop.order.Order;
 import de.neuefische.cgnjava222.ordersystem.shop.order.OrderRepo;
 import de.neuefische.cgnjava222.ordersystem.shop.product.Product;
 import de.neuefische.cgnjava222.ordersystem.shop.product.ProductRepo;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -98,5 +100,21 @@ class ShopServiceTest {
         assertThat(actual)
                 .hasSameElementsAs(expected)
                 .hasSize(expected.size());
+    }
+
+    @Test
+    void expectExceptionWhenReferencingNonexistingProduct() {
+        //given
+        ProductRepo productRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
+
+        //when
+        try {
+            shopService.addOrder(106, List.of(999));
+            Assertions.fail("Expected exception was not thrown");
+        } catch (NoSuchElementException e) {
+            // perfect, exception was thrown
+        }
     }
 }

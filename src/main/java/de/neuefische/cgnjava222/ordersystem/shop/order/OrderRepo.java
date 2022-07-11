@@ -1,13 +1,17 @@
 package de.neuefische.cgnjava222.ordersystem.shop.order;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OrderRepo {
 
-    private final List<Order> orders = new ArrayList<>();
+    private final Map<Integer, Order> orders = new HashMap<>();
 
     public void addOrder(Order order) {
-        orders.add(order);
+        orders.put(order.id(), order);
+    }
+
+    public Order getOrder(int orderId) {
+        return orders.get(orderId);
     }
 }

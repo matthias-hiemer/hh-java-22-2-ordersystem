@@ -37,4 +37,8 @@ public class ShopService {
         Order order = new Order(orderId, products);
         orderRepo.addOrder(order);
     }
+
+    public Order getOrder(int orderId) {
+        return orderRepo.getOrder(orderId);
+    }
 }

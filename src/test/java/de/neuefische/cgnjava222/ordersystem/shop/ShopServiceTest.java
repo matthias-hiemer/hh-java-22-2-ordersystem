@@ -1,8 +1,9 @@
 package de.neuefische.cgnjava222.ordersystem.shop;
 
+import de.neuefische.cgnjava222.ordersystem.shop.order.Order;
+import de.neuefische.cgnjava222.ordersystem.shop.order.OrderRepo;
 import de.neuefische.cgnjava222.ordersystem.shop.product.Product;
 import de.neuefische.cgnjava222.ordersystem.shop.product.ProductRepo;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -15,7 +16,8 @@ class ShopServiceTest {
     void getProduct() {
         //given
         ProductRepo productRepo = new ProductRepo();
-        ShopService shopService = new ShopService(productRepo);
+        OrderRepo orderRepo = new OrderRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
 
         //when
         Product actual = shopService.getProduct(2);
@@ -28,7 +30,8 @@ class ShopServiceTest {
     void listProducts() {
         //given
         ProductRepo productRepo = new ProductRepo();
-        ShopService shopService = new ShopService(productRepo);
+        OrderRepo orderRepo = new OrderRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
 
         //when
         List<Product> actual = shopService.listProducts();
@@ -43,5 +46,30 @@ class ShopServiceTest {
         assertThat(actual)
                 .hasSameElementsAs(expected)
                 .hasSize(expected.size());
+    }
+
+    @Test
+    void addAndGetOrder() {
+        //given
+        ProductRepo productRepo = new ProductRepo();
+        OrderRepo orderRepo = new OrderRepo();
+        ShopService shopService = new ShopService(productRepo, orderRepo);
+
+        //when
+        shopService.addOrder(106, List.of(1, 3, 4));
+        Order actual = shopService.getOrder(106);
+
+        //then
+        assertThat(actual)
+                .isEqualTo(
+                        new Order(
+                                106,
+                                List.of(
+                                        new Product(1, "Apfel"),
+                                        new Product(3, "Zitrone"),
+                                        new Product(4, "Mandarine")
+                                )
+                        )
+                );
     }
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class ProductRepo {
 
-    Map<Integer, Product> products = Map.of(
+    private final Map<Integer, Product> products = Map.of(
             1, new Product(1, "Apfel"),
             2, new Product(2, "Banane"),
             3, new Product(3, "Zitrone"),
